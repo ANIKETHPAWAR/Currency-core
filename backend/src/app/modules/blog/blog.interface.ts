@@ -16,4 +16,6 @@ export interface Iblog {
   status?: Status;
   isDeleted?: boolean;
   createdBy: Types.ObjectId;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

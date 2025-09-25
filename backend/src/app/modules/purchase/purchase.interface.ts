@@ -16,5 +16,6 @@ export interface IPurchase {
   razorpayOrderId?: string;
   razorpayPaymentId?: string;
   razorpaySignature?: string;
-  createdAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

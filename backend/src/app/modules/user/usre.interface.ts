@@ -21,9 +21,11 @@ export interface IUser {
   phone?: string;
   picture?: string;
   address?: string;
-  isDeleted?: string;
+  isDeleted?: boolean;
   isActive?: IsActive;
-  isVerified?: string;
+  isVerified?: boolean;
   role?: Role;
   auths: IAuthProvider[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
