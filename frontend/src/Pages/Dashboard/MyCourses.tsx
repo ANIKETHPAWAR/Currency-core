@@ -35,14 +35,27 @@ const MyCourses = () => {
                                     <div className="space-y-6">
                                           {courses.map(course => (
                                                 <div key={course._id} className="bg-black/50 p-6 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border border-gray-700">
-                                                      <div>
+                                                      <div className="flex-1">
                                                             <h2 className="text-xl font-semibold text-white">{course.courseTitle}</h2>
-                                                            <div className="flex items-center gap-4 mt-2">
+                                                            <div className="flex flex-wrap items-center gap-4 mt-2">
                                                                   <p className="text-sm text-gray-400">
-                                                                        Purchased On: {new Date(course.createdAt).toLocaleDateString('en-GB')}
+                                                                        Purchased: {new Date(course.createdAt).toLocaleDateString('en-GB')}
                                                                   </p>
                                                                   <p className="text-sm text-gray-400">
                                                                         Mode: <span className="font-medium text-blue-400">{course.purchaseType}</span>
+                                                                  </p>
+                                                                  {course.paymentMethod && (
+                                                                        <p className="text-sm text-gray-400">
+                                                                              Payment: <span className="font-medium text-green-400 capitalize">{course.paymentMethod}</span>
+                                                                        </p>
+                                                                  )}
+                                                                  <p className="text-sm text-gray-400">
+                                                                        Status: <span className={`font-medium ${course.paymentStatus === 'Completed' ? 'text-green-400' : course.paymentStatus === 'Pending' ? 'text-yellow-400' : 'text-red-400'}`}>
+                                                                              {course.paymentStatus}
+                                                                        </span>
+                                                                  </p>
+                                                                  <p className="text-lg font-bold text-blue-400">
+                                                                        ₹{course.price.toLocaleString()}
                                                                   </p>
                                                             </div>
                                                       </div>

@@ -28,6 +28,20 @@ const verifyPayment = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const createDirectPurchase = catchAsync(async (req: Request, res: Response) => {
+  const purchaseData = {
+    ...req.body,
+    userId: req.user.userId,
+  };
+  const result = await purchaseService.createDirectPurchase(purchaseData);
+  sendResponse(res, {
+    success: true,
+    statusCode: StatusCodes.CREATED,
+    message: "Purchase created successfully",
+    data: result,
+  });
+});
+
 const getMyCourses = catchAsync(async (req: Request, res: Response) => {
   const result = await purchaseService.getMyCourses(req.user);
   sendResponse(res, {
@@ -41,5 +55,6 @@ const getMyCourses = catchAsync(async (req: Request, res: Response) => {
 export const purchaseController = {
   createOrder,
   verifyPayment,
+  createDirectPurchase,
   getMyCourses,
 };
