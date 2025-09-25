@@ -30,23 +30,28 @@ const loadEnvVariables = (): EnvConfig => {
     "RAZORPAY_KEY_ID",
     "RAZORPAY_KEY_SECRET",
   ];
-  requiredEnv.forEach((key) => {
-    if (!process.env[key]) {
-      throw new Error(`Missing required env ${key}`);
-    }
-  });
+  
+  // Only check required env vars in production
+  if (process.env.NODE_ENV === 'production') {
+    requiredEnv.forEach((key) => {
+      if (!process.env[key]) {
+        throw new Error(`Missing required env ${key}`);
+      }
+    });
+  }
+  
   return {
-    PORT: process.env.PORT as string,
-    MONGO_URI: process.env.MONGO_URI as string,
-    NODE_ENV: process.env.NODE_ENV as "development" | "production",
-    JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET as string,
-    BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND as string,
-    JWT_ACCESS_EXP: process.env.JWT_ACCESS_EXP as string,
-    JWT_REFRESH_EXP: process.env.JWT_REFRESH_EXP as string,
-    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET as string,
-    BASE_URL: process.env.BASE_URL as string,
-    RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID as string,
-    RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET as string,
+    PORT: process.env.PORT || "8080",
+    MONGO_URI: process.env.MONGO_URI || "mongodb://localhost:27017/currency-core",
+    NODE_ENV: (process.env.NODE_ENV as "development" | "production") || "development",
+    JWT_ACCESS_SECRET: process.env.JWT_ACCESS_SECRET || "your_jwt_access_secret_key_here",
+    BCRYPT_SALT_ROUND: process.env.BCRYPT_SALT_ROUND || "12",
+    JWT_ACCESS_EXP: process.env.JWT_ACCESS_EXP || "1d",
+    JWT_REFRESH_EXP: process.env.JWT_REFRESH_EXP || "7d",
+    JWT_REFRESH_SECRET: process.env.JWT_REFRESH_SECRET || "your_jwt_refresh_secret_key_here",
+    BASE_URL: process.env.BASE_URL || "http://localhost:8080",
+    RAZORPAY_KEY_ID: process.env.RAZORPAY_KEY_ID || "your_razorpay_key_id",
+    RAZORPAY_KEY_SECRET: process.env.RAZORPAY_KEY_SECRET || "your_razorpay_key_secret",
   };
 };
 
