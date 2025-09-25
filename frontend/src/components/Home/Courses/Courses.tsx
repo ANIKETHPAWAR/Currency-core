@@ -1,5 +1,6 @@
 import { Button } from '../../ui/button';
 import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const courses = [
       {
@@ -52,8 +53,10 @@ const Courses = () => {
                               ))}
                         </div>
                         <div className="mt-16 text-center">
-                              <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
-                                    View All Courses <ArrowRight className="ml-2 h-5 w-5" />
+                              <Button asChild size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                                    <Link to="/batches">
+                                          View All Courses <ArrowRight className="ml-2 h-5 w-5" />
+                                    </Link>
                               </Button>
                         </div>
                   </div>
