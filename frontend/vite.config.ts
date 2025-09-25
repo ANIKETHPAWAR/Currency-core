@@ -11,8 +11,6 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
-  define: {
-    'import.meta.env.VITE_API_BASE_URL': JSON.stringify('http://localhost:5000/api/v1'),
-    'import.meta.env.VITE_RAZORPAY_KEY_ID': JSON.stringify('rzp_test_YOUR_ACTUAL_KEY_ID_HERE'),
-  },
+  // Environment variables are automatically loaded from .env file
+  // No need to define them here as Vite handles them automatically
 });
