@@ -6,7 +6,10 @@ class AppErr extends Error {
     if (stack) {
       this.stack = stack;
     } else {
-      Error.captureStackTrace(this, this.constructor);
+      // Use a more compatible approach for captureStackTrace
+      if (Error.captureStackTrace) {
+        Error.captureStackTrace(this, this.constructor);
+      }
     }
   }
 }
