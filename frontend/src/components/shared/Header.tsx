@@ -1,5 +1,6 @@
 import { User, LogOut, BookOpen, } from "lucide-react";
 import { Button } from "../ui/button";
+import Avatar from "../ui/Avatar";
 import logo from "../../assets/logo.png";
 
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -56,8 +57,13 @@ const Header = () => {
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <button className="relative h-11 cursor-pointer w-11 bg-gray-700 border-gray-300 rounded-full focus-visible:ring-2 focus-visible:ring-blue-500">
-                    <img className="   rounded-full object-cover  " src={user.picture || `https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png`} alt={user.name} />
+                  <button className="relative cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-900">
+                    <Avatar 
+                      name={user.name} 
+                      picture={user.picture} 
+                      size="md"
+                      className="hover:scale-105 transition-transform"
+                    />
                   </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56 bg-gray-900 text-white border-gray-800" align="end" forceMount>
