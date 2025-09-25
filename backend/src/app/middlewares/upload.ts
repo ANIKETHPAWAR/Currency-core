@@ -10,10 +10,10 @@ const createUploader = (destination: string) => {
   }
 
   const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (req: any, file: any, cb: any) => {
       cb(null, uploadsDir);
     },
-    filename: (req, file, cb) => {
+    filename: (req: any, file: any, cb: any) => {
       const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
       const fileExtension = path.extname(file.originalname);
       cb(null, file.fieldname + "-" + uniqueSuffix + fileExtension);
@@ -22,8 +22,8 @@ const createUploader = (destination: string) => {
 
   const fileFilter = (
     req: Request,
-    file: Express.Multer.File,
-    cb: multer.FileFilterCallback
+    file: any,
+    cb: any
   ) => {
     const allowedFileTypes = /jpeg|jpg|png/;
     const mimetype = allowedFileTypes.test(file.mimetype);
