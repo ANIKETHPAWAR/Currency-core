@@ -2,6 +2,7 @@ import { useState, useEffect, type ChangeEvent, type FormEvent } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import axiosInstance from '../../api/axiosInstance';
 import { Button } from '../../components/ui/button';
+import Avatar from '../../components/ui/Avatar';
 
 
 const ProfileSettings = () => {
@@ -76,10 +77,11 @@ const ProfileSettings = () => {
       return (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
                   <div className="md:col-span-1 text-center">
-                        <img
-                              src={user?.picture || `https://api.dicebear.com/8.x/initials/svg?seed=${user?.name}`}
-                              alt="Profile"
-                              className="w-40 h-40 rounded-full mx-auto mb-4 border-4 border-gray-700 object-cover"
+                        <Avatar
+                              name={user?.name || 'User'}
+                              picture={user?.picture}
+                              size="lg"
+                              className="w-40 h-40 mx-auto mb-4 border-4 border-gray-700"
                         />
                         <input
                               type="file"
