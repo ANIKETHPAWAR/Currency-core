@@ -94,21 +94,21 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
 
       return (
             <>
-            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 overflow-y-auto">
-                  <div className="relative bg-[#0A1D37] border border-gray-800 rounded-xl w-full max-w-7xl shadow-2xl grid grid-cols-1 xl:grid-cols-2 my-8">
+            <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-2 sm:p-4 overflow-y-auto">
+                  <div className="relative bg-[#0A1D37] border border-gray-800 rounded-xl w-full max-w-7xl shadow-2xl grid grid-cols-1 lg:grid-cols-2 my-2 sm:my-4 lg:my-8 max-h-[90vh] overflow-y-auto">
                         <Button onClick={onClose} variant="ghost" size="icon" className="absolute top-4 right-4 text-gray-400 hover:text-white z-10">
                               <X />
                         </Button>
                         
                         {/* Left Side - Bank Details */}
-                        <div className="p-6 xl:p-8 border-b xl:border-b-0 xl:border-r border-gray-800">
-                              <h3 className="text-lg font-semibold text-gray-300 tracking-wider mb-6">PAYMENT DETAILS</h3>
+                        <div className="p-4 sm:p-6 lg:p-8 border-b lg:border-b-0 lg:border-r border-gray-800">
+                              <h3 className="text-lg font-semibold text-gray-300 tracking-wider mb-6 mt-2">PAYMENT DETAILS</h3>
                               
                               {/* Payment Method Selection */}
                               <div className="mb-6">
                                     <h4 className="text-md font-semibold text-gray-300 mb-4">Select Payment Method</h4>
                                     <div className="space-y-3">
-                                          <label className="flex items-center p-3 border border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition">
+                                          <label className="flex items-center p-3 sm:p-4 border border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition">
                                                 <input
                                                       type="radio"
                                                       name="paymentMethod"
@@ -117,10 +117,10 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                                                       onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
                                                       className="mr-3"
                                                 />
-                                                <CreditCard className="mr-3 text-blue-400" size={20} />
-                                                <span className="text-white">Bank Transfer / UPI</span>
+                                                <CreditCard className="mr-3 text-blue-400 flex-shrink-0" size={20} />
+                                                <span className="text-white text-sm sm:text-base">Bank Transfer / UPI</span>
                                           </label>
-                                          <label className="flex items-center p-3 border border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition">
+                                          <label className="flex items-center p-3 sm:p-4 border border-gray-700 rounded-lg cursor-pointer hover:border-blue-500 transition">
                                                 <input
                                                       type="radio"
                                                       name="paymentMethod"
@@ -129,8 +129,8 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                                                       onChange={(e) => setPaymentMethod(e.target.value as PaymentMethod)}
                                                       className="mr-3"
                                                 />
-                                                <Truck className="mr-3 text-green-400" size={20} />
-                                                <span className="text-white">Cash on Delivery</span>
+                                                <Truck className="mr-3 text-green-400 flex-shrink-0" size={20} />
+                                                <span className="text-white text-sm sm:text-base">Cash on Delivery</span>
                                           </label>
                                     </div>
                               </div>
@@ -139,50 +139,50 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                               {paymentMethod === 'bank' && (
                                     <div className="p-4 bg-gray-800 rounded-lg">
                                           <h4 className="text-md font-semibold text-gray-300 mb-4">Bank Transfer Details</h4>
-                                          <div className="space-y-3">
+                                              <div className="space-y-3">
+                                                    <div className="flex items-center justify-between p-3 bg-gray-900 rounded">
+                                                          <span className="text-gray-400 text-xs sm:text-sm">Account Name:</span>
+                                                          <div className="flex items-center">
+                                                                <span className="text-white mr-2 text-xs sm:text-sm truncate max-w-[120px] sm:max-w-none">{bankDetails.accountName}</span>
+                                                                <button
+                                                                      onClick={() => copyToClipboard(bankDetails.accountName, 'accountName')}
+                                                                      className="text-blue-400 hover:text-blue-300 flex-shrink-0"
+                                                                >
+                                                                      {copiedField === 'accountName' ? <Check size={16} /> : <Copy size={16} />}
+                                                                </button>
+                                                          </div>
+                                                    </div>
                                                 <div className="flex items-center justify-between p-3 bg-gray-900 rounded">
-                                                      <span className="text-gray-400 text-sm">Account Name:</span>
+                                                      <span className="text-gray-400 text-xs sm:text-sm">Account Number:</span>
                                                       <div className="flex items-center">
-                                                            <span className="text-white mr-2 text-sm">{bankDetails.accountName}</span>
-                                                            <button
-                                                                  onClick={() => copyToClipboard(bankDetails.accountName, 'accountName')}
-                                                                  className="text-blue-400 hover:text-blue-300"
-                                                            >
-                                                                  {copiedField === 'accountName' ? <Check size={16} /> : <Copy size={16} />}
-                                                            </button>
-                                                      </div>
-                                                </div>
-                                                <div className="flex items-center justify-between p-3 bg-gray-900 rounded">
-                                                      <span className="text-gray-400 text-sm">Account Number:</span>
-                                                      <div className="flex items-center">
-                                                            <span className="text-white mr-2 text-sm font-mono">{bankDetails.accountNumber}</span>
+                                                            <span className="text-white mr-2 text-xs sm:text-sm font-mono truncate max-w-[100px] sm:max-w-none">{bankDetails.accountNumber}</span>
                                                             <button
                                                                   onClick={() => copyToClipboard(bankDetails.accountNumber, 'accountNumber')}
-                                                                  className="text-blue-400 hover:text-blue-300"
+                                                                  className="text-blue-400 hover:text-blue-300 flex-shrink-0"
                                                             >
                                                                   {copiedField === 'accountNumber' ? <Check size={16} /> : <Copy size={16} />}
                                                             </button>
                                                       </div>
                                                 </div>
                                                 <div className="flex items-center justify-between p-3 bg-gray-900 rounded">
-                                                      <span className="text-gray-400 text-sm">IFSC Code:</span>
+                                                      <span className="text-gray-400 text-xs sm:text-sm">IFSC Code:</span>
                                                       <div className="flex items-center">
-                                                            <span className="text-white mr-2 text-sm font-mono">{bankDetails.ifscCode}</span>
+                                                            <span className="text-white mr-2 text-xs sm:text-sm font-mono">{bankDetails.ifscCode}</span>
                                                             <button
                                                                   onClick={() => copyToClipboard(bankDetails.ifscCode, 'ifscCode')}
-                                                                  className="text-blue-400 hover:text-blue-300"
+                                                                  className="text-blue-400 hover:text-blue-300 flex-shrink-0"
                                                             >
                                                                   {copiedField === 'ifscCode' ? <Check size={16} /> : <Copy size={16} />}
                                                             </button>
                                                       </div>
                                                 </div>
                                                 <div className="flex items-center justify-between p-3 bg-gray-900 rounded">
-                                                      <span className="text-gray-400 text-sm">Bank Name:</span>
+                                                      <span className="text-gray-400 text-xs sm:text-sm">Bank Name:</span>
                                                       <div className="flex items-center">
-                                                            <span className="text-white mr-2 text-sm">{bankDetails.bankName}</span>
+                                                            <span className="text-white mr-2 text-xs sm:text-sm truncate max-w-[100px] sm:max-w-none">{bankDetails.bankName}</span>
                                                             <button
                                                                   onClick={() => copyToClipboard(bankDetails.bankName, 'bankName')}
-                                                                  className="text-blue-400 hover:text-blue-300"
+                                                                  className="text-blue-400 hover:text-blue-300 flex-shrink-0"
                                                             >
                                                                   {copiedField === 'bankName' ? <Check size={16} /> : <Copy size={16} />}
                                                             </button>
@@ -216,8 +216,8 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                         </div>
 
                         {/* Right Side - Order Summary & Form */}
-                        <div className="p-6 xl:p-8">
-                              <h3 className="text-lg font-semibold text-gray-300 tracking-wider mb-6">ORDER SUMMARY</h3>
+                        <div className="p-4 sm:p-6 lg:p-8">
+                              <h3 className="text-lg font-semibold text-gray-300 tracking-wider mb-6 mt-2">ORDER SUMMARY</h3>
                               
                               {/* Course Details */}
                               <div className="mb-6 p-4 bg-gray-800 rounded-lg">
@@ -230,47 +230,47 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                               {/* User Information Form */}
                               <div className="mb-6">
                                     <h4 className="text-md font-semibold text-gray-300 mb-4">Your Information</h4>
-                                    <div className="space-y-4">
-                                          <div>
-                                                <label className="text-sm font-medium text-gray-400">Email Address</label>
-                                                <input 
-                                                      type="email" 
-                                                      value={user?.email || ''} 
-                                                      disabled 
-                                                      className="mt-2 w-full bg-gray-800 border border-gray-700 rounded-md p-3 text-gray-400 cursor-not-allowed" 
-                                                />
-                                          </div>
-                                          <div>
-                                                <label className="text-sm font-medium text-gray-400">Phone Number</label>
-                                                <input 
-                                                      type="tel" 
-                                                      name="phone" 
-                                                      value={formData.phone} 
-                                                      onChange={handleInputChange} 
-                                                      className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition" 
-                                                />
-                                          </div>
-                                          <div>
-                                                <label className="text-sm font-medium text-gray-400">Age</label>
-                                                <input 
-                                                      type="number" 
-                                                      name="age" 
-                                                      value={formData.age} 
-                                                      onChange={handleInputChange} 
-                                                      className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition" 
-                                                />
-                                          </div>
-                                          <div>
-                                                <label className="text-sm font-medium text-gray-400">Address</label>
-                                                <textarea 
-                                                      name="address" 
-                                                      value={formData.address} 
-                                                      onChange={handleInputChange} 
-                                                      rows={3} 
-                                                      className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition"
-                                                ></textarea>
-                                          </div>
-                                    </div>
+                                        <div className="space-y-4">
+                                              <div>
+                                                    <label className="text-sm font-medium text-gray-400">Email Address</label>
+                                                    <input 
+                                                          type="email" 
+                                                          value={user?.email || ''} 
+                                                          disabled 
+                                                          className="mt-2 w-full bg-gray-800 border border-gray-700 rounded-md p-3 text-gray-400 cursor-not-allowed text-sm sm:text-base" 
+                                                    />
+                                              </div>
+                                              <div>
+                                                    <label className="text-sm font-medium text-gray-400">Phone Number</label>
+                                                    <input 
+                                                          type="tel" 
+                                                          name="phone" 
+                                                          value={formData.phone} 
+                                                          onChange={handleInputChange} 
+                                                          className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base" 
+                                                    />
+                                              </div>
+                                              <div>
+                                                    <label className="text-sm font-medium text-gray-400">Age</label>
+                                                    <input 
+                                                          type="number" 
+                                                          name="age" 
+                                                          value={formData.age} 
+                                                          onChange={handleInputChange} 
+                                                          className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base" 
+                                                    />
+                                              </div>
+                                              <div>
+                                                    <label className="text-sm font-medium text-gray-400">Address</label>
+                                                    <textarea 
+                                                          name="address" 
+                                                          value={formData.address} 
+                                                          onChange={handleInputChange} 
+                                                          rows={3} 
+                                                          className="mt-2 w-full bg-gray-900 border border-gray-700 rounded-md p-3 text-white focus:ring-2 focus:ring-blue-500 transition text-sm sm:text-base resize-none"
+                                                    ></textarea>
+                                              </div>
+                                        </div>
                               </div>
 
                               {/* Terms and Conditions */}
@@ -293,7 +293,7 @@ const PurchaseModal = ({ course, onClose }: PurchaseModalProps) => {
                                   <Button 
                                         onClick={handlePayment} 
                                         disabled={!termsAccepted || isLoading} 
-                                        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed py-3 text-base font-semibold"
+                                        className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-gray-600 disabled:cursor-not-allowed py-3 text-sm sm:text-base font-semibold"
                                   >
                                         {isLoading ? 'Processing...' : (paymentMethod === 'bank' ? 'Proceed with Bank Transfer' : 'Place COD Order')}
                                   </Button>
