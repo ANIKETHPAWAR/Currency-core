@@ -5,6 +5,7 @@ import Login from "../Pages/Login/Login";
 import Signup from "../Pages/Signup/Signup";
 import Courses from "../Pages/Courses/Courses";
 import Batches from "../Pages/Batches/Batches";
+import Store from "../Pages/Store/Store";
 import ProtectedRoute from "./ProtectedRoute";
 
 import EditProfile from "../Pages/Dashboard/EditProfile";
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: "/signup", element: <Signup /> },
       { path: "/courses", element: <Courses /> },
       { path: "/batches", element: <Batches /> },
+      { path: "/store", element: <Store /> },
       {
         path: "/dashboard/my-courses",
         element: (

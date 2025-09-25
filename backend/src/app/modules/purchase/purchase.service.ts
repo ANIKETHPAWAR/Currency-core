@@ -81,6 +81,14 @@ const verifyPayment = async (body: any) => {
   return { success: true, message: "Payment verified successfully." };
 };
 
+const createDirectPurchase = async (payload: IPurchase) => {
+  // Set payment status based on payment method
+  payload.paymentStatus = payload.paymentMethod === 'cod' ? "Pending" : "Completed";
+  
+  const purchase = await Purchase.create(payload);
+  return purchase;
+};
+
 const getMyCourses = async (user: JwtPayload) => {
   const purchases = await Purchase.find({
     userId: user.userId,
@@ -92,5 +100,6 @@ const getMyCourses = async (user: JwtPayload) => {
 export const purchaseService = {
   createOrder,
   verifyPayment,
+  createDirectPurchase,
   getMyCourses,
 };

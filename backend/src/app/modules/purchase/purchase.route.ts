@@ -17,6 +17,12 @@ router.post(
   purchaseController.verifyPayment
 );
 
+router.post(
+  "/create-purchase",
+  checkAuth(Role.USER, Role.ADMIN, Role.SUPER_ADMIN),
+  purchaseController.createDirectPurchase
+);
+
 router.get(
   "/my-courses",
   checkAuth(Role.USER, Role.ADMIN, Role.SUPER_ADMIN),

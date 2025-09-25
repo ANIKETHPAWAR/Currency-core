@@ -7,6 +7,7 @@ const purchaseSchema = new Schema<IPurchase>(
     courseTitle: { type: String, required: true },
     price: { type: Number, required: true },
     purchaseType: { type: String, enum: ["Online", "Offline"], required: true },
+    paymentMethod: { type: String, enum: ["bank", "cod"] },
     contactInfo: {
       phone: { type: String, required: true },
       email: { type: String, required: true },

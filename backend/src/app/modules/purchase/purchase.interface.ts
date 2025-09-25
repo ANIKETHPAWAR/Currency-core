@@ -6,6 +6,7 @@ export interface IPurchase {
   courseTitle: string;
   price: number;
   purchaseType: "Online" | "Offline";
+  paymentMethod?: "bank" | "cod";
   contactInfo: {
     phone: string;
     email: string;
